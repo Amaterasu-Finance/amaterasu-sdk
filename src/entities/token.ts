@@ -57,18 +57,11 @@ export function currencyEquals(currencyA: Currency, currencyB: Currency): boolea
 }
 
 export const WETH = {
-  [ChainId.HARMONY_MAINNET]: new Token(
-    ChainId.HARMONY_MAINNET,
-    '0xcF664087a5bB0237a0BAd6742852ec6c8d69A27a',
+  [ChainId.MTV_MAINNET]: new Token(
+    ChainId.MTV_MAINNET,
+    '0x4c4A5d20f1ee40eaacB6A7787d20D16b7997363B',
     18,
-    'WONE',
-    'Wrapped ONE'
-  ),
-  [ChainId.HARMONY_TESTNET]: new Token(
-    ChainId.HARMONY_TESTNET,
-    '0x7466d7d0C21Fa05F32F5a0Fa27e12bdC06348Ce2',
-    18,
-    'WONE',
-    'Wrapped ONE'
+    'WMTV',
+    'Wrapped MTV'
   )
 }
