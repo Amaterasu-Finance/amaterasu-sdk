@@ -1,4 +1,4 @@
-import DEFAULT_TOKEN_LIST from '@foxswap/default-token-list'
+import DEFAULT_TOKEN_LIST from '@amaterasu/default-token-list'
 import { ChainId } from './constants'
 import { Token } from './entities/token'
 
@@ -100,6 +100,5 @@ export class Tokens {
 }
 
 export const TOKENS: { [chainId in ChainId]: Tokens } = {
-  [ChainId.HARMONY_MAINNET]: new Tokens(ChainId.HARMONY_MAINNET),
-  [ChainId.HARMONY_TESTNET]: new Tokens(ChainId.HARMONY_TESTNET),
+  [ChainId.MTV_MAINNET]: new Tokens(ChainId.MTV_MAINNET)
 }
