@@ -1,4 +1,4 @@
-import { Currency, ETHER, HARMONY, BINANCE_COIN } from './entities'
+import { Currency, ETHER, HARMONY, BINANCE_COIN, MTV } from './entities'
 import { ChainId } from './constants'
 // @ts-ignore
 import { random } from 'lodash.random'
@@ -9,7 +9,8 @@ import { random } from 'lodash.random'
 export enum Blockchain {
   ETHEREUM = 1,
   BINANCE_SMART_CHAIN = 2,
-  HARMONY = 3
+  HARMONY = 3,
+  MTV = 4
 }
 
 /**
@@ -43,6 +44,9 @@ export class BlockchainSettings {
     } else {
       switch (this.chainId) {
         case 56:
+        case 62621:
+          this.blockchain = Blockchain.MTV
+          break
         case 97:
           this.blockchain = Blockchain.BINANCE_SMART_CHAIN
           break
@@ -87,6 +91,9 @@ export class BlockchainSettings {
           break
         case 1666700000:
           this.name = 'Harmony Testnet'
+          break
+        case 62621:
+          this.name = 'MTV Mainnet'
           break
         default:
           this.name = 'Ethereum Mainnet'
@@ -138,6 +145,9 @@ export class BlockchainSettings {
         case 1666700000:
           this.rpcURLs = ['https://api.s0.b.hmny.io/']
           break
+        case 62621:
+          this.rpcURLs = ['https://rpc.mtv.ac/']
+          break
         default:
           this.rpcURLs = this.rpcAPIKey && this.rpcAPIKey !== '' ? [`https://mainnet.infura.io/v3/${this.rpcAPIKey}`] : ['https://mainnet.infura.io/v3/']
       }
@@ -176,6 +186,9 @@ export class BlockchainSettings {
         case 1666700000:
           this.explorerURL = 'https://explorer.testnet.harmony.one/'
           break
+        case 62621:
+          this.explorerURL = 'https://e.mtv.ac/'
+          break
         default:
           this.explorerURL = 'https://etherscan.io/'
       }
@@ -191,6 +204,9 @@ export class BlockchainSettings {
       case 1666600000:
       case 1666700000:
         this.currency = HARMONY
+        break
+      case 62621:
+        this.currency = MTV
         break
       default:
         this.currency = ETHER
@@ -208,6 +224,9 @@ export class BlockchainSettings {
           break
         case 1666600000:
         case 1666700000:
+          this.blockTime = 2
+          break
+        case 62621:
           this.blockTime = 2
           break
         default:
@@ -228,6 +247,5 @@ export class BlockchainSettings {
 }
 
 export const BLOCKCHAIN_SETTINGS: { [chainId in ChainId]: BlockchainSettings } = {
-  [ChainId.HARMONY_MAINNET]: new BlockchainSettings(ChainId.HARMONY_MAINNET),
-  [ChainId.HARMONY_TESTNET]: new BlockchainSettings(ChainId.HARMONY_TESTNET),
+  [ChainId.MTV_MAINNET]: new BlockchainSettings(ChainId.MTV_MAINNET)
 }
