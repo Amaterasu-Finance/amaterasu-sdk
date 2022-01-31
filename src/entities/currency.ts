@@ -22,6 +22,11 @@ export class Currency {
    * The HARMONY instance of the base class `Currency`.
    */
   public static readonly HARMONY: Currency = new Currency(18, 'ONE', 'Harmony')
+  
+  /**
+   * The MTV instance of the base class `Currency`.
+   */
+  public static readonly MTV: Currency = new Currency(18, 'MTV', 'MultiVAC')
 
   /**
    * The BINANCE_COIN instance of the base class `Currency`.
@@ -46,6 +51,7 @@ export class Currency {
 const ETHER = Currency.ETHER
 const HARMONY = Currency.HARMONY
 const BINANCE_COIN = Currency.BINANCE_COIN
-const DEFAULT_CURRENCIES = [ETHER, HARMONY, BINANCE_COIN]
+const MTV = Currency.MTV
+const DEFAULT_CURRENCIES = [ETHER, HARMONY, BINANCE_COIN, MTV]
 
-export { ETHER, HARMONY, BINANCE_COIN, DEFAULT_CURRENCIES }
+export { MTV, ETHER, HARMONY, BINANCE_COIN, DEFAULT_CURRENCIES }
