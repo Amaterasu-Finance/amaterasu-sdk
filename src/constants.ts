@@ -6,12 +6,12 @@ export type BigintIsh = JSBI | bigint | string
 export enum Blockchain {
   ETHEREUM = 1,
   BINANCE_SMART_CHAIN = 2,
-  HARMONY = 3
+  HARMONY = 3,
+  MTV = 4
 }
 
 export enum ChainId {
-  HARMONY_MAINNET = 1666600000,
-  HARMONY_TESTNET = 1666700000
+  MTV_MAINNET = 62621
 }
 
 export enum TradeType {
@@ -26,11 +26,10 @@ export enum Rounding {
 }
 
 export const FACTORY_ADDRESSES: { [chainId in ChainId]: string } = {
-  [ChainId.HARMONY_MAINNET]: '0xfA53b963A39621126bf45F647F813952cD3c5C66',
-  [ChainId.HARMONY_TESTNET]: '0x487e1b2F84d3b02E4ba209D994825761920df8d0'
+  [ChainId.MTV_MAINNET]: '0x54507f67bB3BE7e426a1112B6F6Bb1fA9EC27D81'
 }
 
-export const INIT_CODE_HASH = '0x6be983fca8cd114a38e7c87a92f0bf4c13f5e8e006242d62f7277ca478e65ffe'
+export const INIT_CODE_HASH = '0xb3da4698cc518015841d30e83d315ee7fe7123dc7cbbe30dc10538e10633deff'
 
 export const MINIMUM_LIQUIDITY = JSBI.BigInt(1000)
 
