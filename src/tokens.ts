@@ -1,4 +1,4 @@
-import DEFAULT_TOKEN_LIST from '@amaterasu/default-token-list'
+import DEFAULT_TOKEN_LIST from '@amaterasu-fi/default-token-list'
 import { ChainId } from './constants'
 import { Token } from './entities/token'
 
