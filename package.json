@@ -1,7 +1,7 @@
 {
-  "name": "@foxswap/sdk",
+  "name": "@amaterasu/sdk",
   "license": "MIT",
-  "version": "1.2.4",
+  "version": "1.0.0",
   "description": "🛠 An SDK for building applications on top of FoxSwap.",
   "main": "dist/index.js",
   "private": false,
@@ -9,7 +9,7 @@
   "files": [
     "dist"
   ],
-  "repository": "https://github.com/FarmersOnlyFi/foxswap-sdk.git",
+  "repository": "https://github.com/Amaterasu-Finance/foxswap-sdk.git",
   "keywords": [
     "uniswap",
     "foxswap",
