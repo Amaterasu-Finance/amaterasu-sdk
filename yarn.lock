@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@amaterasu-fi/default-token-list@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@amaterasu-fi/default-token-list/-/default-token-list-1.1.1.tgz#b2cad33157e8b67ba85f11272c4e86b74f498822"
-  integrity sha512-gf1LGGYyYLzkZMFBuwPjzB1XlNvhO5FmdR/O+hoSN4Pjc/0hevq4o1mF+9My5UXkMyFIN+rgoYJmm4J8DRKqnQ==
+"@amaterasu-fi/default-token-list@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@amaterasu-fi/default-token-list/-/default-token-list-1.2.0.tgz#6642031d3739780a3079535a8f073f020b9dcb05"
+  integrity sha512-PfGfALqVH3on30vErLNZ3VsdeLAG4lQwYC2eOrnk4HlJFrI4d09T+7nY7IVTm48d2mYy2YqF37h0rHi1CBKwww==
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.5.5":
   version "7.12.13"
