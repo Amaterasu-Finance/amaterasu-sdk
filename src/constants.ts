@@ -26,7 +26,7 @@ export enum Rounding {
 }
 
 export const FACTORY_ADDRESSES: { [chainId in ChainId]: string } = {
-  [ChainId.MTV_MAINNET]: '0x1A913fC7947B85334379DA6AdD91f1B4283cB796'
+  [ChainId.MTV_MAINNET]: '0xc294Cbbd4d37965D975534b519913532a042C76A'
 }
 
 export const INIT_CODE_HASH = '0xb3da4698cc518015841d30e83d315ee7fe7123dc7cbbe30dc10538e10633deff'
