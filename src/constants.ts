@@ -26,7 +26,7 @@ export enum Rounding {
 }
 
 export const FACTORY_ADDRESSES: { [chainId in ChainId]: string } = {
-  [ChainId.MTV_MAINNET]: '0x9E377Bb8DAC93Eda51F66c92140Fca3a2d569df4'
+  [ChainId.MTV_MAINNET]: '0x6A4EA1056146Cd284B19Cd0FEE80Df3Dc80b9A90'
 }
 
 export const INIT_CODE_HASH = '0xb3da4698cc518015841d30e83d315ee7fe7123dc7cbbe30dc10538e10633deff'
@@ -41,8 +41,8 @@ export const THREE = JSBI.BigInt(3)
 export const FIVE = JSBI.BigInt(5)
 export const TEN = JSBI.BigInt(10)
 export const _100 = JSBI.BigInt(100)
-export const _997 = JSBI.BigInt(997)
-export const _1000 = JSBI.BigInt(1000)
+export const _997 = JSBI.BigInt(9975)
+export const _1000 = JSBI.BigInt(10000)
 
 export enum SolidityType {
   uint8 = 'uint8',

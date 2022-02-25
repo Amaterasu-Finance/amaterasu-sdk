@@ -227,7 +227,7 @@ export class BlockchainSettings {
           this.blockTime = 2
           break
         case 62621:
-          this.blockTime = 2
+          this.blockTime = 3
           break
         default:
           this.blockTime = 13
