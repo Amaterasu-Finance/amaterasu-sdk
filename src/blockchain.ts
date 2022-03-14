@@ -10,7 +10,9 @@ export enum Blockchain {
   ETHEREUM = 1,
   BINANCE_SMART_CHAIN = 2,
   HARMONY = 3,
-  MTV = 4
+  MTV = 4,
+  AURORA_MAINNET = 5,
+  AURORA_TESTNET = 6
 }
 
 /**
@@ -95,6 +97,12 @@ export class BlockchainSettings {
         case 62621:
           this.name = 'MTV Mainnet'
           break
+        case 1313161554:
+          this.name = 'Aurora Mainnet'
+          break
+        case 1313161555:
+          this.name = 'Aurora Testnet'
+          break
         default:
           this.name = 'Ethereum Mainnet'
       }
@@ -148,6 +156,12 @@ export class BlockchainSettings {
         case 62621:
           this.rpcURLs = ['https://rpc.mtv.ac/']
           break
+        case 1313161554:
+          this.rpcURLs = ['https://mainnet.aurora.dev']
+          break
+        case 1313161555:
+          this.rpcURLs = ['https://testnet.aurora.dev']
+          break
         default:
           this.rpcURLs = this.rpcAPIKey && this.rpcAPIKey !== '' ? [`https://mainnet.infura.io/v3/${this.rpcAPIKey}`] : ['https://mainnet.infura.io/v3/']
       }
@@ -188,6 +202,12 @@ export class BlockchainSettings {
           break
         case 62621:
           this.explorerURL = 'https://e.mtv.ac/'
+          break
+        case 1313161554:
+          this.explorerURL = 'https://aurorascan.dev/'
+          break
+        case 1313161555:
+          this.explorerURL = 'https://testnet.aurorascan.dev/'
           break
         default:
           this.explorerURL = 'https://etherscan.io/'
@@ -247,5 +267,7 @@ export class BlockchainSettings {
 }
 
 export const BLOCKCHAIN_SETTINGS: { [chainId in ChainId]: BlockchainSettings } = {
-  [ChainId.MTV_MAINNET]: new BlockchainSettings(ChainId.MTV_MAINNET)
+  [ChainId.MTV_MAINNET]: new BlockchainSettings(ChainId.MTV_MAINNET),
+  [ChainId.AURORA_MAINNET]: new BlockchainSettings(ChainId.AURORA_MAINNET),
+  [ChainId.AURORA_TESTNET]: new BlockchainSettings(ChainId.AURORA_TESTNET)
 }

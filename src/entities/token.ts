@@ -59,9 +59,23 @@ export function currencyEquals(currencyA: Currency, currencyB: Currency): boolea
 export const WETH = {
   [ChainId.MTV_MAINNET]: new Token(
     ChainId.MTV_MAINNET,
-    '0x4c4A5d20f1ee40eaacB6A7787d20D16b7997363B',
+    '0x8E321596267a4727746b2F48BC8736DB5Da26977',
     18,
     'WMTV',
     'Wrapped MTV'
+  ),
+  [ChainId.AURORA_MAINNET]: new Token(
+      ChainId.AURORA_MAINNET,
+      '0xC9BdeEd33CD01541e1eeD10f90519d2C06Fe3feB',
+      18,
+      'WETH',
+      'Wrapped ETH'
+  ),
+  [ChainId.AURORA_TESTNET]: new Token(
+      ChainId.AURORA_TESTNET,
+      '0x27e2714bAf8054Fbbb12CeABD9f1CBdCB058BBaa',
+      18,
+      'WETH',
+      'Wrapped ETH'
   )
 }
