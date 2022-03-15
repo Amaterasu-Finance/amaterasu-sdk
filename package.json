@@ -1,7 +1,7 @@
 {
   "name": "@amaterasu-fi/sdk",
   "license": "MIT",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "🛠 An SDK for building applications on top of.",
   "main": "dist/index.js",
   "private": false,
@@ -24,7 +24,7 @@
     "prepublishOnly": "tsdx build"
   },
   "dependencies": {
-    "@amaterasu-fi/default-token-list": "^2.0.1",
+    "@amaterasu-fi/default-token-list": "^2.0.3",
     "@foxswap/core": "^1.0.1",
     "big.js": "^5.2.2",
     "decimal.js-light": "^2.5.0",
