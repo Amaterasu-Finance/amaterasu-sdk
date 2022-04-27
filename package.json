@@ -1,7 +1,7 @@
 {
   "name": "@amaterasu-fi/sdk",
   "license": "MIT",
-  "version": "2.2.4",
+  "version": "2.2.5",
   "description": "🛠 An SDK for building applications on top of.",
   "main": "dist/index.js",
   "private": false,
