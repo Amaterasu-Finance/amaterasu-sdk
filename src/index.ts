@@ -4,11 +4,10 @@ export { JSBI }
 export {
   BigintIsh,
   Blockchain,
+  ProtocolName,
   ChainId,
   TradeType,
   Rounding,
-  FACTORY_ADDRESSES,
-  INIT_CODE_HASH,
   MINIMUM_LIQUIDITY
 } from './constants'
 
