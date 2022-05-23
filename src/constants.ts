@@ -47,6 +47,7 @@ export const TEN = JSBI.BigInt(10)
 export const _100 = JSBI.BigInt(100)
 export const _9970 = JSBI.BigInt(9970)
 export const _9975 = JSBI.BigInt(9975)
+export const _9980 = JSBI.BigInt(9980)
 export const _1000 = JSBI.BigInt(10000)
 
 export enum SolidityType {

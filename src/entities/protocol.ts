@@ -1,4 +1,4 @@
-import { ProtocolName, _9970, _9975 }  from '../constants'
+import { ProtocolName, _9970, _9975, _9980 }  from '../constants'
 import { Token } from 'entities/token'
 import JSBI from "jsbi";
 
@@ -38,7 +38,7 @@ export const PROTOCOLS: { [protocol in ProtocolName]: Protocol  } = {
     routerAddress: '0xa3a1eF5Ae6561572023363862e238aFA84C72ef5',
     factoryAddress: '0x7928D4FeA7b2c90C732c10aFF59cf403f0C38246',
     initCodeHash: '0xa06b8b0642cf6a9298322d0c8ac3c68c291ca24dc66245cf23aa2abc33b57e21',
-    fee: _9970,
+    fee: _9980,
     lpName: 'WannaSwap LP Token',
     lpSymbol: 'wLP'
   }
