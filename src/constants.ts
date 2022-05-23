@@ -15,7 +15,8 @@ export enum Blockchain {
 export enum ProtocolName {
   AMATERASU,
   TRISOLARIS,
-  WANNASWAP
+  WANNASWAP,
+  NEARPAD
 }
 
 export enum ChainId {

@@ -24,7 +24,7 @@
     "prepublishOnly": "tsdx build"
   },
   "dependencies": {
-    "@amaterasu-fi/default-token-list": "^2.2.7",
+    "@amaterasu-fi/default-token-list": "^2.2.8",
     "@foxswap/core": "^1.0.1",
     "big.js": "^5.2.2",
     "decimal.js-light": "^2.5.0",
