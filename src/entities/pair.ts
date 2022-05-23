@@ -11,7 +11,6 @@ import {
   ZERO,
   ONE,
   FIVE,
-  _9975,
   _1000,
   ChainId,
   ProtocolName
@@ -25,6 +24,7 @@ let PAIR_ADDRESS_CACHE: { [protocol: string]: { [token0Address: string]: { [toke
 
 export class Pair {
   public readonly liquidityToken: Token
+  public readonly protocol: ProtocolName
   private readonly tokenAmounts: [TokenAmount, TokenAmount]
 
   public static getAddress(tokenA: Token, tokenB: Token, protocol: ProtocolName): string {
@@ -58,10 +58,11 @@ export class Pair {
       tokenAmounts[0].token.chainId,
       Pair.getAddress(tokenAmounts[0].token, tokenAmounts[1].token, protocol),
       18,
-      'IZA LP',
-      'Izanagi LP'
+      PROTOCOLS[protocol].lpSymbol,
+      PROTOCOLS[protocol].lpName
     )
     this.tokenAmounts = tokenAmounts as [TokenAmount, TokenAmount]
+    this.protocol = protocol
   }
 
   /**
@@ -123,14 +124,14 @@ export class Pair {
     return token.equals(this.token0) ? this.reserve0 : this.reserve1
   }
 
-  public getOutputAmount(inputAmount: TokenAmount, protocol: ProtocolName): [TokenAmount, Pair] {
+  public getOutputAmount(inputAmount: TokenAmount): [TokenAmount, Pair] {
     invariant(this.involvesToken(inputAmount.token), 'TOKEN')
     if (JSBI.equal(this.reserve0.raw, ZERO) || JSBI.equal(this.reserve1.raw, ZERO)) {
       throw new InsufficientReservesError()
     }
     const inputReserve = this.reserveOf(inputAmount.token)
     const outputReserve = this.reserveOf(inputAmount.token.equals(this.token0) ? this.token1 : this.token0)
-    const inputAmountWithFee = JSBI.multiply(inputAmount.raw, _9975)
+    const inputAmountWithFee = JSBI.multiply(inputAmount.raw, PROTOCOLS[this.protocol].fee)
     const numerator = JSBI.multiply(inputAmountWithFee, outputReserve.raw)
     const denominator = JSBI.add(JSBI.multiply(inputReserve.raw, _1000), inputAmountWithFee)
     const outputAmount = new TokenAmount(
@@ -140,10 +141,10 @@ export class Pair {
     if (JSBI.equal(outputAmount.raw, ZERO)) {
       throw new InsufficientInputAmountError()
     }
-    return [outputAmount, new Pair(inputReserve.add(inputAmount), outputReserve.subtract(outputAmount), protocol)]
+    return [outputAmount, new Pair(inputReserve.add(inputAmount), outputReserve.subtract(outputAmount), this.protocol)]
   }
 
-  public getInputAmount(outputAmount: TokenAmount, protocol: ProtocolName): [TokenAmount, Pair] {
+  public getInputAmount(outputAmount: TokenAmount): [TokenAmount, Pair] {
     invariant(this.involvesToken(outputAmount.token), 'TOKEN')
     if (
       JSBI.equal(this.reserve0.raw, ZERO) ||
@@ -156,12 +157,12 @@ export class Pair {
     const outputReserve = this.reserveOf(outputAmount.token)
     const inputReserve = this.reserveOf(outputAmount.token.equals(this.token0) ? this.token1 : this.token0)
     const numerator = JSBI.multiply(JSBI.multiply(inputReserve.raw, outputAmount.raw), _1000)
-    const denominator = JSBI.multiply(JSBI.subtract(outputReserve.raw, outputAmount.raw), _9975)
+    const denominator = JSBI.multiply(JSBI.subtract(outputReserve.raw, outputAmount.raw), PROTOCOLS[this.protocol].fee)
     const inputAmount = new TokenAmount(
       outputAmount.token.equals(this.token0) ? this.token1 : this.token0,
       JSBI.add(JSBI.divide(numerator, denominator), ONE)
     )
-    return [inputAmount, new Pair(inputReserve.add(inputAmount), outputReserve.subtract(outputAmount), protocol)]
+    return [inputAmount, new Pair(inputReserve.add(inputAmount), outputReserve.subtract(outputAmount), this.protocol)]
   }
 
   public getLiquidityMinted(

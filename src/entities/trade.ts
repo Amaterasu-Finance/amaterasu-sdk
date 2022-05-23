@@ -113,6 +113,10 @@ export class Trade {
    */
   public readonly tradeType: TradeType
   /**
+   * The type of the trade, either exact in or exact out.
+   */
+  public readonly protocol: ProtocolName
+  /**
    * The input amount for the trade assuming no slippage.
    */
   public readonly inputAmount: CurrencyAmount
@@ -137,6 +141,7 @@ export class Trade {
    * Constructs an exact in trade with the given amount in and route
    * @param route route of the exact in trade
    * @param amountIn the amount being passed in
+   * @param protocol protocol for trade
    */
   public static exactIn(route: Route, amountIn: CurrencyAmount, protocol: ProtocolName): Trade {
     return new Trade(route, amountIn, TradeType.EXACT_INPUT, protocol)
@@ -146,6 +151,7 @@ export class Trade {
    * Constructs an exact out trade with the given amount out and route
    * @param route route of the exact out trade
    * @param amountOut the amount returned by the trade
+   * @param protocol protocol for trade
    */
   public static exactOut(route: Route, amountOut: CurrencyAmount, protocol: ProtocolName): Trade {
     return new Trade(route, amountOut, TradeType.EXACT_OUTPUT, protocol)
@@ -159,7 +165,7 @@ export class Trade {
       amounts[0] = wrappedAmount(amount, route.chainId)
       for (let i = 0; i < route.path.length - 1; i++) {
         const pair = route.pairs[i]
-        const [outputAmount, nextPair] = pair.getOutputAmount(amounts[i], protocol)
+        const [outputAmount, nextPair] = pair.getOutputAmount(amounts[i])
         amounts[i + 1] = outputAmount
         nextPairs[i] = nextPair
       }
@@ -168,13 +174,14 @@ export class Trade {
       amounts[amounts.length - 1] = wrappedAmount(amount, route.chainId)
       for (let i = route.path.length - 1; i > 0; i--) {
         const pair = route.pairs[i - 1]
-        const [inputAmount, nextPair] = pair.getInputAmount(amounts[i], protocol)
+        const [inputAmount, nextPair] = pair.getInputAmount(amounts[i])
         amounts[i - 1] = inputAmount
         nextPairs[i - 1] = nextPair
       }
     }
 
     this.route = route
+    this.protocol = protocol
     this.tradeType = tradeType
     this.inputAmount =
       tradeType === TradeType.EXACT_INPUT
@@ -255,8 +262,7 @@ export class Trade {
     // used in recursion.
     currentPairs: Pair[] = [],
     originalAmountIn: CurrencyAmount = currencyAmountIn,
-    bestTrades: Trade[] = [],
-    protocol: ProtocolName
+    bestTrades: Trade[] = []
   ): Trade[] {
     invariant(pairs.length > 0, 'PAIRS')
     invariant(maxHops > 0, 'MAX_HOPS')
@@ -279,7 +285,7 @@ export class Trade {
 
       let amountOut: TokenAmount
       try {
-        ;[amountOut] = pair.getOutputAmount(amountIn, protocol)
+        ;[amountOut] = pair.getOutputAmount(amountIn)
       } catch (error) {
         // input too low
         if (error.isInsufficientInputAmountError) {
@@ -295,7 +301,7 @@ export class Trade {
             new Route([...currentPairs, pair], originalAmountIn.currency, currencyOut),
             originalAmountIn,
             TradeType.EXACT_INPUT,
-            protocol
+            pair.protocol
           ),
           maxNumResults,
           tradeComparator
@@ -314,8 +320,7 @@ export class Trade {
           },
           [...currentPairs, pair],
           originalAmountIn,
-          bestTrades,
-          protocol
+          bestTrades
         )
       }
     }
@@ -346,8 +351,7 @@ export class Trade {
     // used in recursion.
     currentPairs: Pair[] = [],
     originalAmountOut: CurrencyAmount = currencyAmountOut,
-    bestTrades: Trade[] = [],
-    protocol: ProtocolName
+    bestTrades: Trade[] = []
   ): Trade[] {
     invariant(pairs.length > 0, 'PAIRS')
     invariant(maxHops > 0, 'MAX_HOPS')
@@ -370,7 +374,7 @@ export class Trade {
 
       let amountIn: TokenAmount
       try {
-        ;[amountIn] = pair.getInputAmount(amountOut, protocol)
+        ;[amountIn] = pair.getInputAmount(amountOut)
       } catch (error) {
         // not enough liquidity in this pair
         if (error.isInsufficientReservesError) {
@@ -386,7 +390,7 @@ export class Trade {
             new Route([pair, ...currentPairs], currencyIn, originalAmountOut.currency),
             originalAmountOut,
             TradeType.EXACT_OUTPUT,
-            protocol
+            pair.protocol
           ),
           maxNumResults,
           tradeComparator
@@ -405,8 +409,7 @@ export class Trade {
           },
           [pair, ...currentPairs],
           originalAmountOut,
-          bestTrades,
-          protocol
+          bestTrades
         )
       }
     }

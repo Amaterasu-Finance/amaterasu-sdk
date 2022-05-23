@@ -45,6 +45,7 @@ export const THREE = JSBI.BigInt(3)
 export const FIVE = JSBI.BigInt(5)
 export const TEN = JSBI.BigInt(10)
 export const _100 = JSBI.BigInt(100)
+export const _9970 = JSBI.BigInt(9970)
 export const _9975 = JSBI.BigInt(9975)
 export const _1000 = JSBI.BigInt(10000)
 
