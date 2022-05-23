@@ -44,9 +44,9 @@ export const PROTOCOLS: { [protocol in ProtocolName]: Protocol  } = {
   },
   [ProtocolName.NEARPAD]: {
     protocol: ProtocolName.NEARPAD,
-    routerAddress: '0x2CB45Edb4517d5947aFdE3BEAbF95A582506858B',
-    factoryAddress: '0xc66F594268041dB60507F00703b152492fb176E7',
-    initCodeHash: '0x754e1d90e536e4c1df81b7f030f47b4ca80c87120e145c294f098c83a6cb5ace',
+    routerAddress: '0xBaE0d7DFcd03C90EBCe003C58332c1346A72836A',
+    factoryAddress: '0x34484b4E416f5d4B45D4Add0B6eF6Ca08FcED8f1',
+    initCodeHash: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
     fee: _9970,
     lpName: 'NearPad LP Token',
     lpSymbol: 'NLP'
