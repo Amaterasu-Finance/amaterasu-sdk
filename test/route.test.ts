@@ -1,12 +1,12 @@
-import { Token, WETH, ChainId, Pair, TokenAmount, Route, ETHER } from '../src'
+import { Token, WETH, ChainId, Pair, TokenAmount, Route, ETHER, ProtocolName } from '../src'
 
 describe('Route', () => {
   const token0 = new Token(ChainId.MTV_MAINNET, '0x0000000000000000000000000000000000000001', 18, 't0')
   const token1 = new Token(ChainId.MTV_MAINNET, '0x0000000000000000000000000000000000000002', 18, 't1')
   const weth = WETH[ChainId.MTV_MAINNET]
-  const pair_0_1 = new Pair(new TokenAmount(token0, '100'), new TokenAmount(token1, '200'))
-  const pair_0_weth = new Pair(new TokenAmount(token0, '100'), new TokenAmount(weth, '100'))
-  const pair_1_weth = new Pair(new TokenAmount(token1, '175'), new TokenAmount(weth, '100'))
+  const pair_0_1 = new Pair(new TokenAmount(token0, '100'), new TokenAmount(token1, '200'), ProtocolName.AMATERASU)
+  const pair_0_weth = new Pair(new TokenAmount(token0, '100'), new TokenAmount(weth, '100'), ProtocolName.AMATERASU)
+  const pair_1_weth = new Pair(new TokenAmount(token1, '175'), new TokenAmount(weth, '100'), ProtocolName.AMATERASU)
 
   it('constructs a path from the tokens', () => {
     const route = new Route([pair_0_1], token0)

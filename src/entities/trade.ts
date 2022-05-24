@@ -1,6 +1,6 @@
 import invariant from 'tiny-invariant'
 
-import { ChainId, ONE, TradeType, ZERO } from '../constants'
+import { ChainId, ONE, ProtocolName, TradeType, ZERO } from '../constants'
 import { sortedInsert } from '../utils'
 import { Currency, DEFAULT_CURRENCIES } from './currency'
 import { CurrencyAmount } from './fractions/currencyAmount'
@@ -113,6 +113,10 @@ export class Trade {
    */
   public readonly tradeType: TradeType
   /**
+   * The type of the trade, either exact in or exact out.
+   */
+  public readonly protocol: ProtocolName
+  /**
    * The input amount for the trade assuming no slippage.
    */
   public readonly inputAmount: CurrencyAmount
@@ -137,21 +141,23 @@ export class Trade {
    * Constructs an exact in trade with the given amount in and route
    * @param route route of the exact in trade
    * @param amountIn the amount being passed in
+   * @param protocol protocol for trade
    */
-  public static exactIn(route: Route, amountIn: CurrencyAmount): Trade {
-    return new Trade(route, amountIn, TradeType.EXACT_INPUT)
+  public static exactIn(route: Route, amountIn: CurrencyAmount, protocol: ProtocolName): Trade {
+    return new Trade(route, amountIn, TradeType.EXACT_INPUT, protocol)
   }
 
   /**
    * Constructs an exact out trade with the given amount out and route
    * @param route route of the exact out trade
    * @param amountOut the amount returned by the trade
+   * @param protocol protocol for trade
    */
-  public static exactOut(route: Route, amountOut: CurrencyAmount): Trade {
-    return new Trade(route, amountOut, TradeType.EXACT_OUTPUT)
+  public static exactOut(route: Route, amountOut: CurrencyAmount, protocol: ProtocolName): Trade {
+    return new Trade(route, amountOut, TradeType.EXACT_OUTPUT, protocol)
   }
 
-  public constructor(route: Route, amount: CurrencyAmount, tradeType: TradeType) {
+  public constructor(route: Route, amount: CurrencyAmount, tradeType: TradeType, protocol: ProtocolName) {
     const amounts: TokenAmount[] = new Array(route.path.length)
     const nextPairs: Pair[] = new Array(route.pairs.length)
     if (tradeType === TradeType.EXACT_INPUT) {
@@ -175,6 +181,7 @@ export class Trade {
     }
 
     this.route = route
+    this.protocol = protocol
     this.tradeType = tradeType
     this.inputAmount =
       tradeType === TradeType.EXACT_INPUT
@@ -293,7 +300,8 @@ export class Trade {
           new Trade(
             new Route([...currentPairs, pair], originalAmountIn.currency, currencyOut),
             originalAmountIn,
-            TradeType.EXACT_INPUT
+            TradeType.EXACT_INPUT,
+            pair.protocol
           ),
           maxNumResults,
           tradeComparator
@@ -381,7 +389,8 @@ export class Trade {
           new Trade(
             new Route([pair, ...currentPairs], currencyIn, originalAmountOut.currency),
             originalAmountOut,
-            TradeType.EXACT_OUTPUT
+            TradeType.EXACT_OUTPUT,
+            pair.protocol
           ),
           maxNumResults,
           tradeComparator
